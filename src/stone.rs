@@ -1,8 +1,9 @@
-struct Stone{
+
+
+mod stone{
+pub struct Stone{
     colour: char,//for now it is a char, later we can do somethign with it
-    liberties: u64, 
-    //do we want a IS DEAD field
-    //anything else?
+    pos: (u64, u64), 
 
 }
 
@@ -10,11 +11,14 @@ struct Stone{
 impl Stone{
     //do we want any struct vars for how many are dead for scoring?
     
-   /* fn new() -> Self {
-        //do a thing
-    }*/
+    pub fn new(& mut self, color: char, coord: (u64,u64)) -> &Self {
+        self.colour = color;
+        self.pos.0 = coord.0;
+        self.pos.1 = coord.1;
+        self
+    }
 
     //other heckin funcs 
 }
 
-
+}
