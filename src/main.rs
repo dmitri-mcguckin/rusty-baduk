@@ -1,6 +1,11 @@
 mod stone;
+mod board;
+use stone::*;
+use board::*;
+
 fn main() {
-    println!("Dingus! Здраствуйте Мир! №2 Здесь сейчас.");
-    //I think we should use a adjacency matrix for this -Laps
-    //also practicing pushing so you have 2 pushes of main.rs to master
+	let mut s1 = Stone::new('O', (0,0));
+	let mut s2 = Stone::new('@', (1,1));
+	s1.display();
+	s2.display();
 }
