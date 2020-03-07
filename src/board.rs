@@ -33,10 +33,10 @@ impl Board {
         }
     }
 
-    pub fn place(& mut self, x: usize, y: usize, color: char) {
-        let s = self.stones.get_mut(x - 1)
+    pub fn place(& mut self, x: char, y: usize, color: char) {
+        let s = self.stones.get_mut(y - 1)
                                .unwrap()
-                               .get_mut(y - 1)
+                               .get_mut(((x as u8) - 65) as usize)
                                .unwrap();
         s.place(color);
     }

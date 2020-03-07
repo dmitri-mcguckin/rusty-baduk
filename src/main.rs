@@ -5,12 +5,13 @@ use board::*;
 
 fn main() {
 	let mut board = Board::new(19);
-	board.place(1, 6, '@');
-	board.place(3, 1, 'O');
-	board.place(1, 2, '@');
-	board.place(1, 5, 'O');
-	board.place(4, 4, '@');
-	board.place(1, 1, 'O');
-	board.place(10, 10, '@');
+	board.place('A', 6, '@');
+	board.place('C', 1, 'O');
+	board.place('D', 2, '@');
+	board.place('G', 5, 'O');
+	board.place('H', 4, '@');
+	board.place('J', 1, 'O');
+	board.place('A', 10, '@');
+	board.place('A', 1, 'O');
 	board.draw();
 }
