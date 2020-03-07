@@ -1,12 +1,16 @@
 #[derive(Default)]
-pub struct Stone(char, (u64, u64));
+pub struct Stone(char);
 
 impl<'a> Stone {
-	pub fn new(color: char, coord: (u64,u64)) -> Self {
-		Self(color, coord)
+	pub fn new(color: char) -> Self {
+		Self (color)
 	}
 
-	pub fn display(& mut self) {
-		println!("({}, {:?})", &self.0, &self.1);
+	pub fn color(& self) -> char {
+		self.0
+	}
+
+	pub fn place(& mut self, color: char) {
+		self.0 = color;
 	}
 }
