@@ -33,11 +33,20 @@ impl Board {
         }
     }
 
-    pub fn place(& mut self, x: char, y: usize, color: char) {
+    //A-S and 1-19
+    pub fn place(& mut self, x: char, y: usize, color: char) -> Option<bool> { 
+        //check if x is in the bounds else error throw
+        if y > 19 || y < 1 
+        {
+            let option = None;
+            println!("test here");//make it throw and error 
+            return option;
+        }
         let s = self.stones.get_mut(y - 1)
                                .unwrap()
                                .get_mut(((x as u8) - 65) as usize)
                                .unwrap();
         s.place(color);
+        Some(true)
     }
 }

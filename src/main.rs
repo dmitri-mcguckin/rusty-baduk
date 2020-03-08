@@ -14,4 +14,16 @@ fn main() {
 	board.place('A', 10, '@');
 	board.place('A', 1, 'O');
 	board.draw();
+    let option = board.place('A', 29, 'O');
+    let option2 = board.place('A', 19, 'O');
+    println!("Option returned: {:?}", option);
+    println!("Option2 returned: {:?}", option2);
+    board.draw();
+
+}
+
+#[test]
+fn out_of_bounds(){
+    let mut board = Board::new(19);
+    assert_eq!(board.place('A', 20, '@'), None);
 }
