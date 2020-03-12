@@ -39,8 +39,12 @@ impl Board {
         if y > 19 || y < 1 
         {
             let option = None;
-            println!("test here");//make it throw and error 
             return option;
+        }
+        let valid = check_bounds(x);
+        if valid == false
+        {
+            return None;
         }
         let s = self.stones.get_mut(y - 1)
                                .unwrap()
@@ -50,3 +54,16 @@ impl Board {
         Some(true)
     }
 }
+
+
+    pub fn check_bounds(x_coord: char) -> bool{
+        let mut valid: bool = false;
+        let set = vec!['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S'];
+        for value in set{
+            if value == x_coord {
+                valid = true;
+                return valid;
+            }
+        }
+        valid
+    }

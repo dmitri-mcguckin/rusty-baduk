@@ -6,8 +6,10 @@ use board::*;
 fn main() {
     //make game loop and input system 
 	let mut board = Board::new(19);
-    let mut finished = false;
     board.draw();
+
+    let mut finished = false;
+
     while !finished {
         //if <input> enter coords and switch to other colour also clear and redraw the screen
         //if <input> make finished = false
@@ -26,6 +28,13 @@ fn out_of_bounds(){
 fn in_bounds(){
     let mut board = Board::new(19);
     assert_eq!(board.place('A', 19, '@'), Some(true));
+}
+
+#[test]
+fn check_bounds_test(){
+    let mut board = Board::new(19);
+    assert_eq!(check_bounds('A'), true);
+    assert_eq!(check_bounds('Z'), false);
 }
 
 
