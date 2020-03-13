@@ -2,13 +2,26 @@ mod stone;
 mod board;
 use stone::*;
 use board::*;
-use std::io;
+//use std::io;
 
 fn main() {
 	let mut board = Board::new(19);
-    board.draw();
+	let mut b_score = 0;
+	let mut w_score = 0;
 
-    let mut stopper = String::new();
+	b_score += board.place(3, 3, 'O');
+	b_score += board.place(4, 2, 'O');
+	//b_score += board.place(5, 3, 'O');
+
+	w_score += board.place(4, 3, '@');
+
+	b_score += board.place(4, 4, 'O');
+
+    board.draw();
+	println!("Black score: {}", b_score);
+	println!("White score: {}", w_score);
+
+    /*let mut stopper = String::new();
     let mut x_coord = String::new();
     let mut y_coord = String::new();
     let mut stone_colour = String::new();
@@ -58,7 +71,7 @@ fn main() {
 
             finished = true;
 
-    }
+    }*/
 
 }
 
