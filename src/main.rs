@@ -2,18 +2,62 @@ mod stone;
 mod board;
 use stone::*;
 use board::*;
+use std::io;
 
 fn main() {
-    //make game loop and input system 
 	let mut board = Board::new(19);
     board.draw();
 
-    let mut finished = false;
+    let mut stopper = String::new();
+    let mut x_coord = String::new();
+    let mut y_coord = String::new();
+    let mut stone_colour = String::new();
+
+    let mut finished: bool = false;
+    let quit = "quit";
+
 
     while !finished {
-        //if <input> enter coords and switch to other colour also clear and redraw the screen
-        //if <input> make finished = false
-        finished = true;
+
+        //reading in stopping variable ---------------------------
+        println!("if you wish to quit type 'quit': ");
+        match io::stdin().read_line(&mut stopper) {
+            Ok(_) => {
+                println!("success input is: {}", stopper);
+            },
+            Err(e) => println!("error in readin: {}", e)
+        }
+
+        if stopper.eq("quit") == true{ //does not work
+            println!("\n\nHEY WE DID IT YO\n\n");
+            //finished = true;
+        }
+
+        //Reading in X coord ------------------------------------------
+        //figure out how to get a single character out of this 
+        println!("Enter in a Letter A-S: ");
+        match io::stdin().read_line(&mut x_coord) {
+            Ok(_) => {
+                println!("success input is: {}", stone_colour);
+            },
+            Err(e) => println!("error in readin: {}", e)
+        }
+
+        //figure out how to do integer inputs
+        
+        //reading in stone colour ----------------------------------------
+        println!("Enter in @ for a black stone or O for a white stone: ");
+        match io::stdin().read_line(&mut stone_colour) {
+            Ok(_) => {
+                println!("success input is: {}", stone_colour);
+            },
+            Err(e) => println!("error in readin: {}", e)
+        }
+
+        //place function call here 
+
+            finished = true;
+
     }
 
 }
@@ -32,9 +76,9 @@ fn in_bounds(){
 
 #[test]
 fn check_bounds_test(){
-    let mut board = Board::new(19);
-    assert_eq!(check_bounds('A'), true);
-    assert_eq!(check_bounds('Z'), false);
+    let mut board = Board::new(9);
+    assert_eq!(check_bounds('A', 9), true);
+    assert_eq!(check_bounds('Z', 9), false);
 }
 
 

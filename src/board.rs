@@ -41,7 +41,7 @@ impl Board {
             let option = None;
             return option;
         }
-        let valid = check_bounds(x);
+        let valid = check_bounds(x, y);
         if valid == false
         {
             return None;
@@ -56,9 +56,21 @@ impl Board {
 }
 
 
-    pub fn check_bounds(x_coord: char) -> bool{
+    pub fn check_bounds(x_coord: char, size: usize) -> bool{
         let mut valid: bool = false;
-        let set = vec!['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S'];
+        let mut set = vec![];
+        if size == 19{
+            set.push('A');set.push('B');set.push('C');set.push('D');set.push('E');set.push('F');set.push('G');set.push('H');set.push('I');
+            set.push('J');set.push('K');set.push('L');set.push('M');
+            set.push('N');set.push('O');set.push('P');set.push('Q');set.push('R'); set.push('S');
+        }
+        else if size == 13{
+            set.push('A');set.push('B');set.push('C');set.push('D');set.push('E');set.push('F');set.push('G');set.push('H');set.push('I');
+            set.push('J');set.push('K');set.push('L');set.push('M');
+        }
+        else if size == 9{
+            set.push('A');set.push('B');set.push('C');set.push('D');set.push('E');set.push('F');set.push('G');set.push('H');set.push('I');
+        }
         for value in set{
             if value == x_coord {
                 valid = true;
