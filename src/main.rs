@@ -2,35 +2,56 @@ mod stone;
 mod board;
 use stone::*;
 use board::*;
-//use std::io;
+use std::io;
 
 fn main() {
 	let mut board = Board::new(19);
 	let mut b_score = 0;
 	let mut w_score = 0;
 
-	b_score += board.place(3, 3, 'O');
-	b_score += board.place(4, 2, 'O');
-	//b_score += board.place(5, 3, 'O');
-
-	w_score += board.place(4, 3, '@');
-
-	b_score += board.place(4, 4, 'O');
-
-    board.draw();
-	println!("Black score: {}", b_score);
-	println!("White score: {}", w_score);
-
-    /*let mut stopper = String::new();
+    let mut stopper = String::new();
     let mut x_coord = String::new();
     let mut y_coord = String::new();
-    let mut stone_colour = String::new();
+    let mut stone_colour = 'O';
 
     let mut finished: bool = false;
     let quit = "quit";
 
 
     while !finished {
+		// Draw the board
+		board.draw();
+
+        //Reading in X coord ------------------------------------------
+        //figure out how to get a single character out of this 
+        println!("Enter in x coordinate [0-9]: ");
+        match io::stdin().read_line(&mut x_coord) {
+            Ok(_) => {
+                println!("success input is: {}", x_coord);
+            },
+            Err(e) => println!("error in readin: {}", e)
+        }
+
+        //Reading in Y coord ------------------------------------------
+        //figure out how to get a single character out of this 
+        println!("Enter in y coordinate [A-Z]: ");
+        match io::stdin().read_line(&mut y_coord) {
+            Ok(_) => {
+                println!("success input is: {}", y_coord);
+            },
+            Err(e) => println!("error in readin: {}", e)
+        }
+        
+        // Convert the args
+		let x = x_coord.trim().parse::<usize>().unwrap();
+		let y = (y_coord.chars().next().unwrap() as u32) as usize - 64;
+		println!("---- ({}, {})", x, y);
+		
+		// Place the stone
+		let score = board.place(x, y, stone_colour);
+
+		println!("Black score: {}", b_score);
+		println!("White score: {}", w_score);
 
         //reading in stopping variable ---------------------------
         println!("if you wish to quit type 'quit': ");
@@ -43,35 +64,19 @@ fn main() {
 
         if stopper.eq("quit") == true{ //does not work
             println!("\n\nHEY WE DID IT YO\n\n");
-            //finished = true;
-        }
-
-        //Reading in X coord ------------------------------------------
-        //figure out how to get a single character out of this 
-        println!("Enter in a Letter A-S: ");
-        match io::stdin().read_line(&mut x_coord) {
-            Ok(_) => {
-                println!("success input is: {}", stone_colour);
-            },
-            Err(e) => println!("error in readin: {}", e)
-        }
-
-        //figure out how to do integer inputs
-        
-        //reading in stone colour ----------------------------------------
-        println!("Enter in @ for a black stone or O for a white stone: ");
-        match io::stdin().read_line(&mut stone_colour) {
-            Ok(_) => {
-                println!("success input is: {}", stone_colour);
-            },
-            Err(e) => println!("error in readin: {}", e)
-        }
-
-        //place function call here 
-
             finished = true;
-
-    }*/
+        }
+		
+		// Switch turns
+		if stone_colour == 'O' {
+			b_score += score;
+			stone_colour = '@'
+		}
+		else {
+			w_score += score;
+			stone_colour = 'O'
+		}
+    }
 
 }
 
@@ -93,23 +98,3 @@ fn check_bounds_test(){
     assert_eq!(check_bounds('A', 9), true);
     assert_eq!(check_bounds('Z', 9), false);
 }
-
-
-
-
-/*
-	let mut board = Board::new(19);
-	board.place('A', 6, '@');
-	board.place('C', 1, 'O');
-	board.place('D', 2, '@');
-	board.place('G', 5, 'O');
-	board.place('H', 4, '@');
-	board.place('J', 1, 'O');
-	board.place('A', 10, '@');
-	board.place('A', 1, 'O');
-	board.draw();
-    let option = board.place('A', 29, 'O');
-    let option2 = board.place('A', 19, 'O');
-    println!("Option returned: {:?}", option);
-    println!("Option2 returned: {:?}", option2);
-    board.draw();*/
